@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  LCLFMDBModel
+//
+//  Created by 云淡风轻 on 2018/11/8.
+//  Copyright © 2018 北京正图数创科技股份有限公司. All rights reserved.
+//
+
+#import "LCLDataManager.h"
+#import "LCLPerson.h"
+#import <FMDB.h>
+#import <objc/runtime.h>
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define LCLScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define LCLScreenHeight [[UIScreen mainScreen] bounds].size.height
+
+#endif /* PrefixHeader_pch */
