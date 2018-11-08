@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LCLAddViewController.h"
+#import "LCLSearchViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -25,12 +26,26 @@
     self.title = @"联系人列表";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    /** 搜索数据 */
+    UIBarButtonItem * searchItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchItemActin)];
+    self.navigationItem.leftBarButtonItem = searchItem;
+    
     /** 添加数据 */
     UIBarButtonItem * addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemActin)];
     self.navigationItem.rightBarButtonItem = addItem;
     
     [self.view addSubview:self.tableView];
     
+    [self loadNewData];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.tableView.frame = CGRectMake(0, 64, LCLScreenWidth, LCLScreenHeight - 64);
+}
+
+#pragma mark - Actions
+- (void)loadNewData {
     [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
     [[LCLDataManager shareManager] openDatabase];
     
@@ -43,19 +58,20 @@
     [[LCLDataManager shareManager] closeDatabase];
 }
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    self.tableView.frame = CGRectMake(0, 64, LCLScreenWidth, LCLScreenHeight - 64);
-}
-
-#pragma mark - Actions
 - (void)addItemActin {
-    UIStoryboard *main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LCLAddViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLAddViewController"];
     vc.refreshBlock = ^(LCLPerson *person) {
-        [self.dataSource addObject:person];
-        [self.tableView reloadData];
+//        [self.dataSource addObject:person];
+//        [self.tableView reloadData];
+        [self loadNewData];
     };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)searchItemActin {
+    UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LCLSearchViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLSearchViewController"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -140,6 +156,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%s", __func__);
     LCLPerson * person = self.dataSource[indexPath.row];
+    UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LCLAddViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLAddViewController"];
+    vc.refreshBlock = ^(LCLPerson *person) {
+//        [self.dataSource addObject:person];
+//        [self.tableView reloadData];
+        [self loadNewData];
+    };
+    vc.person = person;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    /*
     NSString * title = [NSString stringWithFormat:@"姓名: %@", person.name];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -147,6 +174,7 @@
     }];
     [alert addAction:sureAction];
     [self presentViewController:alert animated:YES completion:nil];
+     */
 }
 
 

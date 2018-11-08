@@ -145,7 +145,7 @@ static LCLDataManager * _instance;
 }
 
 #pragma mark - 更新数据:单条更新
-- (BOOL)update:(NSString *)tableName model:(id)model primaryKey:(NSString *)primaryKey primaryValue:(NSString *)primaryValue {
+- (BOOL)updateWithTableName:(NSString *)tableName model:(id)model primaryKey:(NSString *)primaryKey primaryValue:(NSString *)primaryValue {
     NSMutableString * sql = [NSMutableString stringWithFormat:@"update '%@' set ", tableName];
     unsigned int count = 0;
     Ivar * ivars = class_copyIvarList([model class], &count);
@@ -182,7 +182,7 @@ static LCLDataManager * _instance;
 }
 
 #pragma mark - 查询数据:单条数据
-- (NSMutableArray *)query:(NSString *)tableName key:(NSString *)key value:(NSString *)value {
+- (NSMutableArray *)queryWithTableName:(NSString *)tableName key:(NSString *)key value:(NSString *)value {
     // 查询数据
     NSString * sql = [NSString stringWithFormat:@"select * from '%@' where %@ = '%@'", tableName, key, value];
     FMResultSet * resultSet = [self.database executeQuery:sql];

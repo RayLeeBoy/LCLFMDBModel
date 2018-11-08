@@ -17,6 +17,7 @@
 		2C737B9021941BBA00ECA5BE /* LCLAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B8F21941BBA00ECA5BE /* LCLAddViewController.m */; };
 		2C737B9421942C1600ECA5BE /* LCLPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B9321942C1600ECA5BE /* LCLPerson.m */; };
 		2C737B9A21942DA000ECA5BE /* LCLDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B9921942DA000ECA5BE /* LCLDataManager.m */; };
+		2C737B9F2194569500ECA5BE /* LCLSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B9E2194569500ECA5BE /* LCLSearchViewController.m */; };
 		D34127CB02376CA969FBE2F3 /* libPods-LCLFMDBModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7F8A7CB8820D169F8E7122 /* libPods-LCLFMDBModel.a */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,8 @@
 		2C737B9321942C1600ECA5BE /* LCLPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLPerson.m; sourceTree = "<group>"; };
 		2C737B9821942DA000ECA5BE /* LCLDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLDataManager.h; sourceTree = "<group>"; };
 		2C737B9921942DA000ECA5BE /* LCLDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLDataManager.m; sourceTree = "<group>"; };
+		2C737B9D2194569500ECA5BE /* LCLSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLSearchViewController.h; sourceTree = "<group>"; };
+		2C737B9E2194569500ECA5BE /* LCLSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLSearchViewController.m; sourceTree = "<group>"; };
 		4A7F8A7CB8820D169F8E7122 /* libPods-LCLFMDBModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LCLFMDBModel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FCD537AD3ACB4A9085DE288 /* Pods-LCLFMDBModel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LCLFMDBModel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LCLFMDBModel/Pods-LCLFMDBModel.debug.xcconfig"; sourceTree = "<group>"; };
 		A22A819A5CCE366749110224 /* Pods-LCLFMDBModel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LCLFMDBModel.release.xcconfig"; path = "Pods/Target Support Files/Pods-LCLFMDBModel/Pods-LCLFMDBModel.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,15 +91,13 @@
 		2C737B75219414D000ECA5BE /* LCLFMDBModel */ = {
 			isa = PBXGroup;
 			children = (
+				2C737BA021945C0E00ECA5BE /* 联系人列表 */,
+				2C737B9C2194567B00ECA5BE /* 搜索联系人 */,
 				2C737B9B2194462300ECA5BE /* 添加联系人 */,
+				2C737BA221945C3100ECA5BE /* 数据模型 */,
+				2C737BA121945C1F00ECA5BE /* 数据库管理类 */,
 				2C737B76219414D000ECA5BE /* AppDelegate.h */,
 				2C737B77219414D000ECA5BE /* AppDelegate.m */,
-				2C737B79219414D000ECA5BE /* ViewController.h */,
-				2C737B7A219414D000ECA5BE /* ViewController.m */,
-				2C737B9221942C1600ECA5BE /* LCLPerson.h */,
-				2C737B9321942C1600ECA5BE /* LCLPerson.m */,
-				2C737B9821942DA000ECA5BE /* LCLDataManager.h */,
-				2C737B9921942DA000ECA5BE /* LCLDataManager.m */,
 				2C737B7C219414D000ECA5BE /* Main.storyboard */,
 				2C737B7F219414D100ECA5BE /* Assets.xcassets */,
 				2C737B81219414D100ECA5BE /* LaunchScreen.storyboard */,
@@ -113,6 +114,42 @@
 				2C737B8F21941BBA00ECA5BE /* LCLAddViewController.m */,
 			);
 			path = "添加联系人";
+			sourceTree = "<group>";
+		};
+		2C737B9C2194567B00ECA5BE /* 搜索联系人 */ = {
+			isa = PBXGroup;
+			children = (
+				2C737B9D2194569500ECA5BE /* LCLSearchViewController.h */,
+				2C737B9E2194569500ECA5BE /* LCLSearchViewController.m */,
+			);
+			path = "搜索联系人";
+			sourceTree = "<group>";
+		};
+		2C737BA021945C0E00ECA5BE /* 联系人列表 */ = {
+			isa = PBXGroup;
+			children = (
+				2C737B79219414D000ECA5BE /* ViewController.h */,
+				2C737B7A219414D000ECA5BE /* ViewController.m */,
+			);
+			path = "联系人列表";
+			sourceTree = "<group>";
+		};
+		2C737BA121945C1F00ECA5BE /* 数据库管理类 */ = {
+			isa = PBXGroup;
+			children = (
+				2C737B9821942DA000ECA5BE /* LCLDataManager.h */,
+				2C737B9921942DA000ECA5BE /* LCLDataManager.m */,
+			);
+			path = "数据库管理类";
+			sourceTree = "<group>";
+		};
+		2C737BA221945C3100ECA5BE /* 数据模型 */ = {
+			isa = PBXGroup;
+			children = (
+				2C737B9221942C1600ECA5BE /* LCLPerson.h */,
+				2C737B9321942C1600ECA5BE /* LCLPerson.m */,
+			);
+			path = "数据模型";
 			sourceTree = "<group>";
 		};
 		5BF6B168DF8D24B510A42554 /* Frameworks */ = {
@@ -219,6 +256,7 @@
 				2C737B9021941BBA00ECA5BE /* LCLAddViewController.m in Sources */,
 				2C737B7B219414D000ECA5BE /* ViewController.m in Sources */,
 				2C737B86219414D100ECA5BE /* main.m in Sources */,
+				2C737B9F2194569500ECA5BE /* LCLSearchViewController.m in Sources */,
 				2C737B78219414D000ECA5BE /* AppDelegate.m in Sources */,
 				2C737B9421942C1600ECA5BE /* LCLPerson.m in Sources */,
 				2C737B9A21942DA000ECA5BE /* LCLDataManager.m in Sources */,

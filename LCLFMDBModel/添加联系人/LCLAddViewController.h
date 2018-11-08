@@ -18,4 +18,6 @@ typedef void(^RefreshBlock)(LCLPerson *);
  */
 @property (nonatomic, copy) RefreshBlock refreshBlock;
 
+@property (nonatomic, strong) LCLPerson * person;
+
 @end

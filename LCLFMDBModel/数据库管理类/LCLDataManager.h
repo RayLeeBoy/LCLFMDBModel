@@ -85,7 +85,7 @@
  @param primaryValue 字段对应的值
  @return 更新数据是否成功
  */
-- (BOOL)update:(NSString *)tableName model:(id)model primaryKey:(NSString *)primaryKey primaryValue:(NSString *)primaryValue;
+- (BOOL)updateWithTableName:(NSString *)tableName model:(id)model primaryKey:(NSString *)primaryKey primaryValue:(NSString *)primaryValue;
 
 /**
  更新数据: 单值更新
@@ -107,7 +107,7 @@
  @param value 字段对应的值
  @return 查询出来的数据
  */
-- (NSMutableArray *)query:(NSString *)tableName key:(NSString *)key value:(NSString *)value;
+- (NSMutableArray *)queryWithTableName:(NSString *)tableName key:(NSString *)key value:(NSString *)value;
 
 /**
  查询数据:全部数据

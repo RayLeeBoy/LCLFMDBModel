@@ -36,6 +36,13 @@
     /** 添加数据 */
     UIBarButtonItem * addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(downItemActin)];
     self.navigationItem.rightBarButtonItem = addItem;
+    
+    if (self.person) {
+        self.nameTextField.text = self.person.name;
+        self.ageTextField.text = self.person.age;
+        self.phoneTextField.text = self.person.phone;
+        self.hobbyTextField.text = self.person.hobby;
+    }
 }
 
 - (void)viewWillLayoutSubviews {
@@ -56,18 +63,31 @@
 #pragma mark - Actions
 - (void)downItemActin {
     LCLPerson * person = [LCLPerson new];
+    NSDate * date = [NSDate date];
+    NSTimeInterval timeInterval = [date timeIntervalSince1970];
     person.name = self.nameTextField.text;
     person.age = self.ageTextField.text;
     person.phone = self.phoneTextField.text;
     person.hobby = self.hobbyTextField.text;
     NSLog(@"%s - %@ - %@ - %@ - %@", __func__, person.name, person.age, person.phone, person.hobby);
     
-    // 数据库: 添加数据
-    [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
-    [[LCLDataManager shareManager] openDatabase];
-    [[LCLDataManager shareManager] createTableWithName:@"t_contacts" class:[LCLPerson class]];
-    [[LCLDataManager shareManager] insertWithTableName:@"t_contacts" model:person];
-    [[LCLDataManager shareManager] openDatabase];
+    if (self.person) {
+        person.userId = self.person.userId;
+        // 数据库: 更新数据
+        [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
+        [[LCLDataManager shareManager] openDatabase];
+        [[LCLDataManager shareManager] createTableWithName:@"t_contacts" class:[LCLPerson class]];
+        [[LCLDataManager shareManager] updateWithTableName:@"t_contacts" model:person primaryKey:@"userId" primaryValue:person.userId];
+        [[LCLDataManager shareManager] closeDatabase];
+    } else {
+        person.userId = [NSString stringWithFormat:@"%.f", timeInterval];
+        // 数据库: 添加数据
+        [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
+        [[LCLDataManager shareManager] openDatabase];
+        [[LCLDataManager shareManager] createTableWithName:@"t_contacts" class:[LCLPerson class]];
+        [[LCLDataManager shareManager] insertWithTableName:@"t_contacts" model:person];
+        [[LCLDataManager shareManager] closeDatabase];
+    }
     
     // 更新列表
     self.refreshBlock(person);
