@@ -7,7 +7,7 @@
 //
 
 #import "LCLSearchViewController.h"
-#import "LCLAddViewController.h"
+#import "LCLEditViewController.h"
 
 @interface LCLSearchViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"联系人列表";
+    self.title = @"搜索联系人";
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.tableView];
@@ -47,13 +47,26 @@
 }
 
 - (void)loadNewData {
-    // 数据库: 添加数据
+    // 数据库: 搜索数据
+    // 获取数据库
     [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
+    
+    // 打开数据库
     [[LCLDataManager shareManager] openDatabase];
+    
+    // 获取表
     [[LCLDataManager shareManager] createTableWithName:@"t_contacts" class:[LCLPerson class]];
+    
+    // 从数据库中查找数据, key: 表中的字段名, value: 字段对应的值
     NSMutableArray * mArr = [[LCLDataManager shareManager] queryWithTableName:@"t_contacts" key:@"phone" value:self.searchTextField.text];
+    
+    // 赋给数据源
     self.dataSource = mArr;
+    
+    // 更新UI
     [self.tableView reloadData];
+    
+    // 关闭数据库
     [[LCLDataManager shareManager] closeDatabase];
 }
 
@@ -139,7 +152,7 @@
     NSLog(@"%s", __func__);
     LCLPerson * person = self.dataSource[indexPath.row];
     UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LCLAddViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLAddViewController"];
+    LCLEditViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLEditViewController"];
     vc.refreshBlock = ^(LCLPerson *person) {
         [self loadNewData];
     };

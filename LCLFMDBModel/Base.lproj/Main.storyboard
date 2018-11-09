@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="1037.5999999999999" y="120.98950524737631"/>
         </scene>
-        <!--Add View Controller-->
+        <!--Edit View Controller-->
         <scene sceneID="not-Zp-87d">
             <objects>
-                <viewController storyboardIdentifier="LCLAddViewController" id="06A-03-stv" customClass="LCLAddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCLEditViewController" id="06A-03-stv" customClass="LCLEditViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="siy-Oq-8BE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,13 +129,13 @@
                                 <rect key="frame" x="0.0" y="51" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="APv-G5-OL9">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="APv-G5-OL9">
                                         <rect key="frame" x="17" y="8" width="277" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVH-TA-Qiy">
                                         <rect key="frame" x="302" y="15" width="65" height="30"/>

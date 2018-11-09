@@ -14,7 +14,7 @@
 		2C737B83219414D100ECA5BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C737B81219414D100ECA5BE /* LaunchScreen.storyboard */; };
 		2C737B86219414D100ECA5BE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B85219414D100ECA5BE /* main.m */; };
 		2C737B8D219414E200ECA5BE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 2C737B8C219414E100ECA5BE /* Podfile */; };
-		2C737B9021941BBA00ECA5BE /* LCLAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B8F21941BBA00ECA5BE /* LCLAddViewController.m */; };
+		2C737B9021941BBA00ECA5BE /* LCLEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B8F21941BBA00ECA5BE /* LCLEditViewController.m */; };
 		2C737B9421942C1600ECA5BE /* LCLPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B9321942C1600ECA5BE /* LCLPerson.m */; };
 		2C737B9A21942DA000ECA5BE /* LCLDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B9921942DA000ECA5BE /* LCLDataManager.m */; };
 		2C737B9F2194569500ECA5BE /* LCLSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C737B9E2194569500ECA5BE /* LCLSearchViewController.m */; };
@@ -33,8 +33,8 @@
 		2C737B84219414D100ECA5BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C737B85219414D100ECA5BE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C737B8C219414E100ECA5BE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		2C737B8E21941BBA00ECA5BE /* LCLAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLAddViewController.h; sourceTree = "<group>"; };
-		2C737B8F21941BBA00ECA5BE /* LCLAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLAddViewController.m; sourceTree = "<group>"; };
+		2C737B8E21941BBA00ECA5BE /* LCLEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLEditViewController.h; sourceTree = "<group>"; };
+		2C737B8F21941BBA00ECA5BE /* LCLEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLEditViewController.m; sourceTree = "<group>"; };
 		2C737B91219429D700ECA5BE /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2C737B9221942C1600ECA5BE /* LCLPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLPerson.h; sourceTree = "<group>"; };
 		2C737B9321942C1600ECA5BE /* LCLPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLPerson.m; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			children = (
 				2C737BA021945C0E00ECA5BE /* 联系人列表 */,
 				2C737B9C2194567B00ECA5BE /* 搜索联系人 */,
-				2C737B9B2194462300ECA5BE /* 添加联系人 */,
+				2C737B9B2194462300ECA5BE /* 编辑联系人 */,
 				2C737BA221945C3100ECA5BE /* 数据模型 */,
 				2C737BA121945C1F00ECA5BE /* 数据库管理类 */,
 				2C737B76219414D000ECA5BE /* AppDelegate.h */,
@@ -107,13 +107,13 @@
 			path = LCLFMDBModel;
 			sourceTree = "<group>";
 		};
-		2C737B9B2194462300ECA5BE /* 添加联系人 */ = {
+		2C737B9B2194462300ECA5BE /* 编辑联系人 */ = {
 			isa = PBXGroup;
 			children = (
-				2C737B8E21941BBA00ECA5BE /* LCLAddViewController.h */,
-				2C737B8F21941BBA00ECA5BE /* LCLAddViewController.m */,
+				2C737B8E21941BBA00ECA5BE /* LCLEditViewController.h */,
+				2C737B8F21941BBA00ECA5BE /* LCLEditViewController.m */,
 			);
-			path = "添加联系人";
+			path = "编辑联系人";
 			sourceTree = "<group>";
 		};
 		2C737B9C2194567B00ECA5BE /* 搜索联系人 */ = {
@@ -253,7 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C737B9021941BBA00ECA5BE /* LCLAddViewController.m in Sources */,
+				2C737B9021941BBA00ECA5BE /* LCLEditViewController.m in Sources */,
 				2C737B7B219414D000ECA5BE /* ViewController.m in Sources */,
 				2C737B86219414D100ECA5BE /* main.m in Sources */,
 				2C737B9F2194569500ECA5BE /* LCLSearchViewController.m in Sources */,

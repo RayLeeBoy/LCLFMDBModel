@@ -10,7 +10,7 @@
 
 
 typedef void(^RefreshBlock)(LCLPerson *);
-@interface LCLAddViewController : UIViewController
+@interface LCLEditViewController : UIViewController
 
 
 /**

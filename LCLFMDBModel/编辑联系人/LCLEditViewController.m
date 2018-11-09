@@ -6,9 +6,9 @@
 //  Copyright © 2018 北京正图数创科技股份有限公司. All rights reserved.
 //
 
-#import "LCLAddViewController.h"
+#import "LCLEditViewController.h"
 
-@interface LCLAddViewController ()
+@interface LCLEditViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
@@ -24,13 +24,13 @@
 
 @end
 
-@implementation LCLAddViewController
+@implementation LCLEditViewController
 
 #pragma mark - ViewController Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"添加联系人";
+    self.title = @"编辑联系人";
     self.view.backgroundColor = [UIColor whiteColor];
     
     /** 添加数据 */
@@ -63,29 +63,50 @@
 #pragma mark - Actions
 - (void)downItemActin {
     LCLPerson * person = [LCLPerson new];
-    NSDate * date = [NSDate date];
-    NSTimeInterval timeInterval = [date timeIntervalSince1970];
     person.name = self.nameTextField.text;
     person.age = self.ageTextField.text;
     person.phone = self.phoneTextField.text;
     person.hobby = self.hobbyTextField.text;
     NSLog(@"%s - %@ - %@ - %@ - %@", __func__, person.name, person.age, person.phone, person.hobby);
     
+    NSDate * date = [NSDate date];
+    NSTimeInterval timeInterval = [date timeIntervalSince1970];
     if (self.person) {
         person.userId = self.person.userId;
         // 数据库: 更新数据
+        // 获取数据库
         [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
+        
+        // 打开数据库
         [[LCLDataManager shareManager] openDatabase];
+        
+        // 获取表
         [[LCLDataManager shareManager] createTableWithName:@"t_contacts" class:[LCLPerson class]];
+        
+        // 更新数据 primaryKey: 表里的字段名, primaryValue: 字段对应的值
         [[LCLDataManager shareManager] updateWithTableName:@"t_contacts" model:person primaryKey:@"userId" primaryValue:person.userId];
+        
+        // 关闭数据库
         [[LCLDataManager shareManager] closeDatabase];
     } else {
-        person.userId = [NSString stringWithFormat:@"%.f", timeInterval];
+        
+        NSString * userId = [NSString stringWithFormat:@"%.f", timeInterval];
+        person.userId = userId;
+        
         // 数据库: 添加数据
+        // 获取数据库
         [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
+        
+        // 打开数据库
         [[LCLDataManager shareManager] openDatabase];
+        
+        // 获取表
         [[LCLDataManager shareManager] createTableWithName:@"t_contacts" class:[LCLPerson class]];
+        
+        // 向数据库写入数据
         [[LCLDataManager shareManager] insertWithTableName:@"t_contacts" model:person];
+        
+        // 关闭数据库
         [[LCLDataManager shareManager] closeDatabase];
     }
     

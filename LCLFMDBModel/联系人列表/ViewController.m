@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "LCLAddViewController.h"
+#import "LCLEditViewController.h"
 #import "LCLSearchViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -19,6 +19,7 @@
 
 @implementation ViewController
 
+#pragma mark - ViewController Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -46,24 +47,33 @@
 
 #pragma mark - Actions
 - (void)loadNewData {
+    
+    // 创建数据库
     [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
+    
+    // 打开数据库
     [[LCLDataManager shareManager] openDatabase];
     
+    // 根据传入的数据模型来创建表
     [[LCLDataManager shareManager] createTableWithName:@"t_contacts" class:[LCLPerson class]];
     
+    // 从数据库中读取数据
     NSMutableArray * mArr = [[LCLDataManager shareManager] queryWithTableName:@"t_contacts"];
+    
+    // 赋给数据源
     self.dataSource = mArr;
+    
+    // 更新UI
     [self.tableView reloadData];
     
+    // 关闭数据库
     [[LCLDataManager shareManager] closeDatabase];
 }
 
 - (void)addItemActin {
     UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LCLAddViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLAddViewController"];
+    LCLEditViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLEditViewController"];
     vc.refreshBlock = ^(LCLPerson *person) {
-//        [self.dataSource addObject:person];
-//        [self.tableView reloadData];
         [self loadNewData];
     };
     [self.navigationController pushViewController:vc animated:YES];
@@ -126,20 +136,33 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%s", __func__);
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除本吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗?" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"点击了取消");
     }];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"点击了确定");
+        
+        // 数据库: 删除数据
+        // 获取数据库
+        [[LCLDataManager shareManager] createDatabaseWithName:@"user"];
+
+        // 打开数据库
         [[LCLDataManager shareManager] openDatabase];
 
+        // 要删除的数据
         LCLPerson * person = self.dataSource[indexPath.row];
-        [[LCLDataManager shareManager] removeWithTableName:@"t_contacts" key:@"phone" value:person.phone];
+        
+        // 从数据库中把这条数据删除, key: 表中的字段, value: 字段对应的值
+        [[LCLDataManager shareManager] removeWithTableName:@"t_contacts" key:@"userId" value:person.userId];
 
+        // 关闭数据库
         [[LCLDataManager shareManager] closeDatabase];
 
+        // 更新数据源
         [self.dataSource removeObjectAtIndex:indexPath.row];
+        
+        // 更新UI
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
     
@@ -157,24 +180,11 @@
     NSLog(@"%s", __func__);
     LCLPerson * person = self.dataSource[indexPath.row];
     UIStoryboard * main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LCLAddViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLAddViewController"];
-    vc.refreshBlock = ^(LCLPerson *person) {
-//        [self.dataSource addObject:person];
-//        [self.tableView reloadData];
-        [self loadNewData];
+    LCLEditViewController * vc = [main instantiateViewControllerWithIdentifier:@"LCLEditViewController"];
+    vc.refreshBlock = ^(LCLPerson *person) {        [self loadNewData];
     };
     vc.person = person;
     [self.navigationController pushViewController:vc animated:YES];
-    
-    /*
-    NSString * title = [NSString stringWithFormat:@"姓名: %@", person.name];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"点击了确定");
-    }];
-    [alert addAction:sureAction];
-    [self presentViewController:alert animated:YES completion:nil];
-     */
 }
 
 
